@@ -8,19 +8,19 @@ export default function LoginPage() {
     <div className="h-screen flex">
       {/* Left Side - Login Form */}
       <div className="w-1/2 flex flex-col  items-center bg-white shadow-lg">
-        <div className="w-3/4w-64 flex-initial">
-          {/* Logo */}
-          <div className="flex justify-center mb-6">
-            <img src="/logo.svg" alt="Logo" className="h-14" />
-          </div>
+        <div className="w-3/4w-64 flex-initial ">
 
-          <h1 className="text-2xl font-bold text-green-600 text-center mb-2">
-            Bin There, Done That!
-          </h1>
-          <p className="text-gray-500 text-center mb-6">
-            Login into your account
+          <div className="flex justify-center items-center  h-96">
+            <img src="/BINLOGO.png" className="h-32" />
+            <h1 className="text-2xl font-bold text-green-600 text-center mt-2">
+            Bin There,<br/>Done That! 
+            </h1>
+            
+          
+        </div>
+        <p className="text-gray-500 text-center mb-6 font-bold">
+          Login into your account
           </p>
-
           {/* Email Field */}
           <div className="w-96 mb-4">
             <input
@@ -32,7 +32,7 @@ export default function LoginPage() {
           </div>
 
           {/* Password Field */}
-          <div className="reltive mb-2">
+          <div className="w-96 reltive mb-2">
             <input
               type="password"
               placeholder="Password"
@@ -42,13 +42,15 @@ export default function LoginPage() {
           </div>
 
           {/* Forgot Password */}
-          <div className="text-right text-sm text-green-600 mb-4 cursor-pointer">
+          <div className="w-96 text-right text-sm text-green-600 mb-4 cursor-pointer"   onClick={() => navigate("/forgotpassword")}>
             Forgot Password?
+     
           </div>
 
           {/* Login Button */}
-          <button className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg">
+          <button className="w-96 bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg ">
             Login
+            
           </button>
 
           {/* OR Divider */}
@@ -58,19 +60,18 @@ export default function LoginPage() {
             <hr className="flex-grow border-gray-300" />
           </div>
 
-          {/* Register Button - Navigates to Register Page */}
+          {/* Register Button - Navigates to Register Page */} <br/>
           <button
-            className="w-full border border-green-600 text-green-600 py-2 rounded-lg"
+            className="w-96 border border-green-600 text-green-600 py-2 rounded-lg"
             onClick={() => navigate("/register")}
-          >
-            Register
+          >Register
           </button>
         </div>
       </div>
 
       {/* Right Side - Illustration & Text */}
       <div className="w-1/2 flex flex-col justify-center items-center bg-gray-200">
-        <img src="/illustration.png" alt="picture ni" className="w-3/4 mb-4" />
+        <img src="/LOGOBIN.png" alt="picture ni" className="w-3/4 mb-4" />
         <p className="text-green-700 text-lg font-semibold text-center">
           Monitor and Analyze your Trash gas toxicity level
         </p>

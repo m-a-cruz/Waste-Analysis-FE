@@ -10,7 +10,7 @@ export default function RegisterPage() {
       <div className="w-1/2 flex items-center justify-center bg-gray-200">
         {/* Placeholder for Illustration */}
         <img
-          src="https://via.placeholder.com/500x400" // Replace with your actual image
+          src="/Registerimg.png" 
           alt="Picture ni"
           className="w-3/4"
         />
