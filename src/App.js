@@ -5,7 +5,8 @@ import RegisterPage from "./RegisterPage";
 import ForgotPassword from "./ForgotPassword";
 import VerifyCode from "./VerifyCode";
 import SetNewPassword from "./SetNewPassword";
-
+import Dashboard from "./Dashboard";
+import AccountSettings from "./AccountSettings";
 
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/forgotpassword/verifycode" element={<VerifyCode />} />
         <Route path="/forgotpassword/verifycode/setnewpassword" element={<SetNewPassword />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/accountsettings" element={<AccountSettings />} />
       </Routes>
     </Router>
   );
