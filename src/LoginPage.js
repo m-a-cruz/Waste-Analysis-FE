@@ -7,8 +7,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
-  const API_URL = "http://192.168.120.80:5000/auth/login"; // Move this to .env for production
+  const API_URL = process.env.REACT_APP_API_URL;
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -20,8 +19,10 @@ export default function LoginPage() {
     }
 
     try {
-      const response = await axios.post(API_URL,{email: email, password: password});
+      const response = await axios.post(`${API_URL}/auth/login`,{email: email, password: password});
+      console.log(response.data);
       localStorage.setItem("id", response.data.id);
+      localStorage.setItem(response.data.name, response.data.email);
       localStorage.setItem(response.data.id, response.data.token);
       navigate("/dashboard");
     } catch (error) {

@@ -7,11 +7,8 @@ import VerifyCode from "./VerifyCode";
 import SetNewPassword from "./SetNewPassword";
 import Dashboard from "./Dashboard";
 import AccountSettings from "./AccountSettings";
-<<<<<<< HEAD
-=======
 import HelpPage from "./HelpPage";
 import ReportAProblem from "./ReportAProblem";
->>>>>>> origin/master
 
 function App() {
   return (
@@ -24,13 +21,10 @@ function App() {
         <Route path="/forgotpassword/verifycode/setnewpassword" element={<SetNewPassword />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/accountsettings" element={<AccountSettings />} />
-<<<<<<< HEAD
-=======
         <Route path="/dashboard/HelpPage" element={<HelpPage />} />
         <Route path="/dashboard/ReportAProblem" element={<ReportAProblem />} />
 
 
->>>>>>> origin/master
       </Routes>
     </Router>
   );
