@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Bell, X, AlertTriangle, Settings} from "lucide-react";
+import { Bell, X, AlertTriangle, Settings, AlertOctagon } from "lucide-react";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -8,9 +8,12 @@ export default function Dashboard() {
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
-  const [selectedAvatar, setSelectedAvatar] = useState("/avatar1.jpg"); // Default avatar
+  const [selectedAvatar, setSelectedAvatar] = useState("/avatar1.jpg");
   const [firstName, setFirstName] = useState(localStorage.getItem("firstName") || "Kaizuko");
   const [lastName, setLastName] = useState(localStorage.getItem("lastName") || "Nami");
+  const [gasLevel, setGasLevel] = useState(0);
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const [timestamp, setTimestamp] = useState("");
 
   useEffect(() => {
     const storedAvatar = localStorage.getItem("selectedAvatar");
@@ -22,23 +25,43 @@ export default function Dashboard() {
     if (!localStorage.getItem("lastName")) localStorage.setItem("lastName", "Nami");
   }, []);
 
-
   const openModal = (content) => {
     setModalContent(content);
     setModalOpen(true);
   };
-  
 
   const toggleDropdown = (dropdown) => {
     if (dropdown === "profile") {
       setIsProfileOpen(!isProfileOpen);
-      setIsNotifOpen(false); 
+      setIsNotifOpen(false);
     } else {
       setIsNotifOpen(!isNotifOpen);
-      setIsProfileOpen(false); 
+      setIsProfileOpen(false);
     }
   };
+  // useEffect(() => {
+  //   const checkGasLevel = async () => {
+  //     try {
+  //       const response = await axios.get("https://your-backend.com/api/gas-level"); 
+  //       const newGasLevel = response.data.gasLevel; 
   
+  //       setGasLevel(newGasLevel);
+
+  // Simulated function to receive gas level data 
+  useEffect(() => {
+    const checkGasLevel = () => {
+      const newGasLevel = Math.random() * 300; 
+      setGasLevel(newGasLevel);
+
+      if (newGasLevel > 200) { 
+        setIsAlertOpen(true);
+        setTimestamp(new Date().toLocaleString());
+      }
+    };
+
+    const interval = setInterval(checkGasLevel, 5000); // Run every 5 seconds
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="bg-gray-100 min-h-screen p-6">
@@ -105,9 +128,8 @@ export default function Dashboard() {
           </div>
         </div>
       </nav>
-
-       {/* Dashboard */}
-    <div className="grid grid-cols-3 gap-6 mt-6">
+      {/* Dashboard */}
+      <div className="grid grid-cols-3 gap-6 mt-6">
         <div className="col-span-1 space-y-6">
           {/* gas concentration */}
           <div
@@ -192,7 +214,6 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-
       {/* Modal */}
       {modalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50" onClick={() => setModalOpen(false)}>
@@ -203,6 +224,38 @@ export default function Dashboard() {
             <iframe src={modalContent} className="w-full h-full rounded-lg" loading="lazy" title="Chart"></iframe>
           </div>
         </div>
+      )}
+
+    {/*  Critical Alert Modal */}
+{isAlertOpen && (
+  <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50 ">
+    <div className="bg-white rounded-lg p-6 w-[900px] h-[300px] shadow-lg border border-gray-300 relative text-center  ring-4 ring-red-300 shadow-red-500/50">
+      <button className="absolute top-3 right-3 text-gray-500 hover:text-gray-700" onClick={() => setIsAlertOpen(false)}>
+        <X size={20} />
+      </button>
+      <div className="flex flex-col items-center">
+        <div className="flex items-center space-x-2 text-red-500 font-bold">
+          <AlertOctagon size={30} />
+          <h2 className="text-2xl font-bold text-pink-600 mt-5">Alert! High Gas Concentration Detected!</h2>
+          <AlertOctagon size={30} />
+        </div>
+        <p className="text-4xl font-extrabold text-red-600 mt-3">{gasLevel.toFixed(4)} ppm</p>
+        <p className="text-gray-700 mt-3 font-medium">
+          Immediate action required! Gas levels have exceeded the safe threshold.
+          <br />
+          Ensure safety measures are in place.
+        </p>
+
+        <p className="text-gray-500 text-sm mt-4">{timestamp}</p>
+
+        {/* Acknowledge Button
+             <button
+             className="mt-4 bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition"
+            onClick={() => setIsAlertOpen(false)}>Acknowledge
+            </button> */}
+          </div>
+        </div>
+      </div>
       )}
     </div>
   );
